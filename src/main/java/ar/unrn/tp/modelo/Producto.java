@@ -15,4 +15,23 @@ public class Producto {
         this.categoria = categoria;
         this.marca = marca;
     }
+
+    public double precio() {
+        return this.precio;
+    }
+
+    public Marca marca() {
+        return this.marca;
+    }
+
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "codigo='" + codigo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", precio=" + precio +
+                ", categoria=" + categoria +
+                ", marca=" + marca +
+                '}';
+    }
 }

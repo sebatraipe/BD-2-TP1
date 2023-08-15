@@ -14,4 +14,9 @@ public class Venta {
         this.cliente = cliente;
         this.productos = productos;
     }
+
+    public void realizarPago() {
+        cliente.validarTarjeta();
+        System.out.println("El pago se realizó con éxito...");
+    }
 }

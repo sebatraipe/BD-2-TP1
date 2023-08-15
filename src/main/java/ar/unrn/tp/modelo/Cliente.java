@@ -1,5 +1,6 @@
 package ar.unrn.tp.modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cliente {
@@ -8,13 +9,16 @@ public class Cliente {
     private String apellido;
     private String dni;
     private String email;
-    private List<TarjetaCredito> tarjetaCreditos;
+    private TarjetaCredito tarjetaCredito;
 
-    public Cliente(String nombre, String apellido, String dni, String email, List<TarjetaCredito> tarjetaCreditos) {
+    public Cliente(String nombre, String apellido, String dni, String email, TarjetaCredito tarjetaCredito) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.email = email;
-        this.tarjetaCreditos = tarjetaCreditos;
+        this.tarjetaCredito = tarjetaCredito;
+    }
+    public void validarTarjeta() {
+        this.tarjetaCredito.validarTarjeta();
     }
 }

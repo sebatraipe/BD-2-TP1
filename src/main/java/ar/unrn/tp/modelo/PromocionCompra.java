@@ -1,6 +1,7 @@
 package ar.unrn.tp.modelo;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PromocionCompra implements Promocion {
 
@@ -8,23 +9,19 @@ public class PromocionCompra implements Promocion {
     private LocalDate fechaFin;
     private double descuento;
 
-    // Preguntar!!
-    private TarjetaCredito tarjetaCredito;
-
-    public PromocionCompra(LocalDate fechaInicio, LocalDate fechaFin, double descuento, TarjetaCredito tarjetaCredito) {
+    public PromocionCompra(LocalDate fechaInicio, LocalDate fechaFin, double descuento) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.descuento = descuento;
-        this.tarjetaCredito = tarjetaCredito;
     }
 
     @Override
-    public void estaActivo(LocalDate fecha) {
-
+    public boolean estaActiva(LocalDate fecha) {
+        return fecha.isAfter(fechaInicio) && fecha.isBefore(fechaFin);
     }
 
     @Override
-    public void calcularDescuento(CarritoCompras carritoCompras) {
-
+    public double calcularDescuento(List<Producto> productos) {
+        return 0;
     }
 }
