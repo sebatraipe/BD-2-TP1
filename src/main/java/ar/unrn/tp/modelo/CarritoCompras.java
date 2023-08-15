@@ -7,7 +7,6 @@ public class CarritoCompras {
 
     private List<Producto> productos;
     private List<Promocion> promociones;
-    private double total;
 
     public CarritoCompras(List<Producto> productos, List<Promocion> promociones) {
         this.productos = productos;
@@ -20,12 +19,26 @@ public class CarritoCompras {
                 .mapToDouble(Producto::precio)
                 .sum();
 
-        double descuento = this.promociones.stream()
+        double descuentoTotal = this.promociones.stream()
                 .filter(promocion -> promocion.estaActiva(LocalDate.now()))
                 .mapToDouble(promocion -> promocion.calcularDescuento(this.productos))
                 .sum();
 
-        return montoTotal -= descuento;
+        return montoTotal -= descuentoTotal;
+    }
+
+    public double montoTotal(TarjetaCredito tarjetaCredito) {
+
+        double montoTotal = this.productos.stream()
+                .mapToDouble(Producto::precio)
+                .sum();
+
+        double descuentoTotal = this.promociones.stream()
+                .filter(promocion -> promocion.estaActiva(LocalDate.now()) && tarjetaCredito.validarTarjeta())
+                .mapToDouble(promocion -> promocion.calcularDescuento(this.productos))
+                .sum();
+
+        return montoTotal -= descuentoTotal;
     }
 
     @Override

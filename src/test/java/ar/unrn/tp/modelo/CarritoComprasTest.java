@@ -55,5 +55,33 @@ class CarritoComprasTest {
         assertEquals(76.0, montoTotal, 0.01);
     }
 
+    @Test
+    public void testCalcularMontoConDescuentoVigenteDelTipoMedioDePago() {
+
+        Categoria categoriaCalzado = new Categoria("Calzado");
+
+        Marca marcaAcme = new Marca("Acme");
+
+        Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
+                categoriaCalzado, marcaAcme);
+        Producto producto2 = new Producto("0000", "Zapatillas", 35.000,
+                categoriaCalzado, marcaAcme);
+
+        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
+
+        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito(tarjetaValidacion, "12345678",
+                "Naranja Z");
+
+        //Creo una promocion de descuento vigente
+        Promocion promocionVigente = new PromocionCompra(LocalDate.now().minusDays(1),
+                LocalDate.now().plusDays(6), 0.08, tarjetaCreditoSebastian);
+
+        CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2), List.of(promocionVigente));
+
+        double montoTotal = carritoCompras.montoTotal(tarjetaCreditoSebastian);
+
+        assertEquals(73.6, montoTotal, 0.01);
+    }
+
 
 }
