@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.lang.IllegalArgumentException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -213,5 +214,13 @@ class CarritoComprasTest {
         assertNotNull(venta);
         assertEquals(true, venta.verificarVentaPorFecha(LocalDateTime.now()));
 
+    }
+
+    @Test
+    public void testCrearProductoSinCategoriaDescripcionPrecio() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Producto producto = new Producto("1234", "descripcion", 0.0,
+                    null, null);
+        });
     }
 }
