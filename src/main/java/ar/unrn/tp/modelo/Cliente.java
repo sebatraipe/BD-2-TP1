@@ -18,7 +18,11 @@ public class Cliente {
         this.email = email;
         this.tarjetaCredito = tarjetaCredito;
     }
-    public void validarTarjeta() {
-        this.tarjetaCredito.validarTarjeta();
+    public boolean validarTarjeta() {
+        return this.tarjetaCredito.validarTarjeta();
+    }
+
+    public TarjetaCredito tarjeta() {
+        return this.tarjetaCredito;
     }
 }

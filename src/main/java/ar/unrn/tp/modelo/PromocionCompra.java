@@ -2,6 +2,7 @@ package ar.unrn.tp.modelo;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class PromocionCompra implements Promocion {
 
@@ -23,10 +24,14 @@ public class PromocionCompra implements Promocion {
     }
 
     @Override
-    public double calcularDescuento(List<Producto> productos) {
-        double montoTotal = productos.stream()
-                .mapToDouble(Producto::precio)
-                .sum();
+    public double calcularDescuento(List<Producto> productos, TarjetaCredito tarjetaCredito) {
+
+        double montoTotal = 0;
+        if (this.tarjetaCredito.verificarTarjeta(tarjetaCredito)) {
+            montoTotal = productos.stream()
+                    .mapToDouble(Producto::precio)
+                    .sum();
+        }
 
         return montoTotal * this.descuento;
     }

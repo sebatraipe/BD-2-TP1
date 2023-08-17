@@ -20,10 +20,6 @@ public class Producto {
         return this.precio;
     }
 
-    public Marca marca() {
-        return this.marca;
-    }
-
     @Override
     public String toString() {
         return "Producto{" +
@@ -33,5 +29,13 @@ public class Producto {
                 ", categoria=" + categoria +
                 ", marca=" + marca +
                 '}';
+    }
+
+    public boolean verificarMarca(Marca marca) {
+        return this.marca.equals(marca);
+    }
+
+    public double descuento(double descuento) {
+        return this.precio * descuento;
     }
 }

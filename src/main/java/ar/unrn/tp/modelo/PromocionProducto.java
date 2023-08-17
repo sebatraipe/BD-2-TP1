@@ -23,11 +23,11 @@ public class PromocionProducto implements Promocion {
     }
 
     @Override
-    public double calcularDescuento(List<Producto> productos) {
+    public double calcularDescuento(List<Producto> productos, TarjetaCredito tarjetaCredito) {
 
         return productos.stream()
-                .filter(p -> p.marca().equals(this.marca))
-                .mapToDouble(p -> p.precio() * this.descuento)
+                .filter(p -> p.verificarMarca(this.marca))
+                .mapToDouble(p -> p.descuento(this.descuento))
                 .sum();
     }
 

@@ -1,5 +1,7 @@
 package ar.unrn.tp.modelo;
 
+import java.util.function.Predicate;
+
 public class TarjetaCredito {
 
     private TarjetaValidacion tarjetaValidacion;
@@ -14,5 +16,9 @@ public class TarjetaCredito {
 
     public boolean validarTarjeta() {
         return this.tarjetaValidacion.validarTarjeta();
+    }
+
+    public boolean verificarTarjeta(TarjetaCredito tarjetaCredito) {
+        return this.descripcion.equals(tarjetaCredito.descripcion);
     }
 }

@@ -7,4 +7,11 @@ public class Marca {
     public Marca(String marca) {
         this.marca = marca;
     }
+
+    @Override
+    public String toString() {
+        return "Marca{" +
+                "marca='" + marca + '\'' +
+                '}';
+    }
 }

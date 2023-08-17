@@ -6,5 +6,5 @@ import java.util.List;
 public interface Promocion {
 
     boolean estaActiva(LocalDate fecha);
-    double calcularDescuento(List<Producto> productos);
+    double calcularDescuento(List<Producto> productos, TarjetaCredito tarjetaCredito);
 }
