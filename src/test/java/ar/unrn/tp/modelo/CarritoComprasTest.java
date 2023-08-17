@@ -223,4 +223,21 @@ class CarritoComprasTest {
                     null, null);
         });
     }
+
+    @Test
+    void testCrearDescuentoConFechasSuperpuestas() {
+
+        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            Promocion promocionProducto = new PromocionProducto(LocalDate.now().plusDays(5),
+                    LocalDate.now().plusDays(3), 0.05, new Marca("Marca"));
+
+            TarjetaCredito tarjetaCreditoMemeCard = new TarjetaCredito(tarjetaValidacion, "12345678",
+                    "MemeCard");
+
+            Promocion promocionCompra = new PromocionCompra(LocalDate.now().plusDays(5),
+                    LocalDate.now().plusDays(3), 0.08, tarjetaCreditoMemeCard);
+        });
+    }
 }

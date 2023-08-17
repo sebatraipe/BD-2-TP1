@@ -12,6 +12,11 @@ public class PromocionCompra implements Promocion {
     private TarjetaCredito tarjetaCredito;
 
     public PromocionCompra(LocalDate fechaInicio, LocalDate fechaFin, double descuento, TarjetaCredito tarjetaCredito) {
+
+        if (fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException("Las fechas de validez están superpuestas...");
+        }
+
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.descuento = descuento;

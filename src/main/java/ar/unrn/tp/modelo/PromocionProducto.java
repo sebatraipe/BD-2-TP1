@@ -11,6 +11,11 @@ public class PromocionProducto implements Promocion {
     private Marca marca;
 
     public PromocionProducto(LocalDate fechaInicio, LocalDate fechaFin, double descuento, Marca marca) {
+
+        if (fechaInicio.isAfter(fechaFin)) {
+            throw new IllegalArgumentException("Las fechas de validez están superpuestas...");
+        }
+
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.descuento = descuento;
