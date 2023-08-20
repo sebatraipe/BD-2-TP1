@@ -2,6 +2,10 @@ package ar.unrn.tp.main;
 
 import ar.unrn.tp.modelo.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,32 +14,24 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
-//
-//        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito(tarjetaValidacion, "12345678",
-//                "Naranja Z");
-//
-//        Cliente clienteSebastian = new Cliente("Sebastian", "Traipe",
-//                "12345678", "shtraipe@unrn.edu.ar", tarjetaCreditoSebastian);
-//
-//        clienteSebastian.validarTarjeta();
-//
-//
-//        Categoria categoriaCalzado = new Categoria("Calzado");
-//
-//        Marca marcaNike = new Marca("Nike");
-////        Marca marcaFila = new Marca("Fila");
-//
-//        Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
-//                categoriaCalzado, marcaNike);
-//        Producto producto2 = new Producto("1234", "Zapatillas", 25.000,
-//                categoriaCalzado, marcaNike);
-//
-//        Promocion promocionVigente = new PromocionProducto(LocalDate.now().minusDays(2),
-//                LocalDate.now().plusDays(7), 0.05, marcaNike);
-//
-//        CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2), List.of(promocionVigente));
-//
-//        System.out.println("Total del carrito: " + carritoCompras.montoTotal());
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        try {
+            tx.begin();
+            Marca marca = new Marca(2L, "Adidas");
+            em.persist(marca);
+            tx.commit();
+            em.clear();
+        } catch (Exception e) {
+            tx.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            if (em != null && em.isOpen())
+                em.close();
+            if (emf != null)
+                emf.close();
+        }
     }
 }

@@ -23,8 +23,8 @@ class CarritoComprasTest {
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaNike = new Marca("Nike");
-        Marca marcaAcme = new Marca("Acme");
+        Marca marcaNike = new Marca(1L, "Nike");
+        Marca marcaAcme = new Marca(2L, "Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaNike);
@@ -35,17 +35,17 @@ class CarritoComprasTest {
                 categoriaCalzado, marcaAcme);
 
         //Creo una promocion de descuento que ya haya caducado
-        Promocion promocionCaducadaProducto = new PromocionProducto(LocalDate.now().minusDays(2),
+        Descuento descuentoCaducadaProducto = new DescuentoProducto(LocalDate.now().minusDays(2),
                 LocalDate.now().minusDays(1), 0.05, marcaNike);
 
-        Promocion promocionCaducadaMarca = new PromocionCompra(LocalDate.now().minusDays(3),
+        Descuento descuentoCaducadaMarca = new DescuentoCompra(LocalDate.now().minusDays(3),
                 LocalDate.now().minusDays(1), 0.08, tarjetaCreditoComarca);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
                 "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
-                List.of(promocionCaducadaProducto, promocionCaducadaMarca), clienteSebastian);
+                List.of(descuentoCaducadaProducto, descuentoCaducadaMarca), clienteSebastian);
 
         double montoTotal = carritoCompras.montoTotal(tarjetaCreditoSebastian);
 
@@ -64,8 +64,8 @@ class CarritoComprasTest {
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaNike = new Marca("Nike");
-        Marca marcaAcme = new Marca("Acme");
+        Marca marcaNike = new Marca(1L, "Nike");
+        Marca marcaAcme = new Marca(2L, "Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaNike);
@@ -76,17 +76,17 @@ class CarritoComprasTest {
                 categoriaCalzado, marcaAcme);
 
         //Creo una promocion de descuento que ya haya caducado
-        Promocion promocionVigenteProducto = new PromocionProducto(LocalDate.now().minusDays(2),
+        Descuento descuentoVigenteProducto = new DescuentoProducto(LocalDate.now().minusDays(2),
                 LocalDate.now().plusDays(5), 0.05, marcaAcme);
 
-        Promocion promocionCompra = new PromocionCompra(LocalDate.now().minusDays(2),
+        Descuento descuentoCompra = new DescuentoCompra(LocalDate.now().minusDays(2),
                 LocalDate.now().plusDays(5), 0.08, tarjetaCreditoComarca);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
                 "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
-                List.of(promocionVigenteProducto, promocionCompra), clienteSebastian);
+                List.of(descuentoVigenteProducto, descuentoCompra), clienteSebastian);
 
         double montoTotal = carritoCompras.montoTotal(tarjetaCreditoSebastian);
 
@@ -105,8 +105,8 @@ class CarritoComprasTest {
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaNike = new Marca("Nike");
-        Marca marcaAcme = new Marca("Acme");
+        Marca marcaNike = new Marca(1L,"Nike");
+        Marca marcaAcme = new Marca(2L,"Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaNike);
@@ -117,17 +117,17 @@ class CarritoComprasTest {
                 categoriaCalzado, marcaNike);
 
         //Creo una promocion de descuento que ya haya caducado
-        Promocion promocionVigenteProducto = new PromocionProducto(LocalDate.now().minusDays(2),
+        Descuento descuentoVigenteProducto = new DescuentoProducto(LocalDate.now().minusDays(2),
                 LocalDate.now().plusDays(5), 0.05, marcaAcme);
 
-        Promocion promocionCompra = new PromocionCompra(LocalDate.now().minusDays(2),
+        Descuento descuentoCompra = new DescuentoCompra(LocalDate.now().minusDays(2),
                 LocalDate.now().plusDays(5), 0.08, tarjetaCreditoComarca);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
                 "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
-                List.of(promocionVigenteProducto, promocionCompra), clienteSebastian);
+                List.of(descuentoVigenteProducto, descuentoCompra), clienteSebastian);
 
         double montoTotal = carritoCompras.montoTotal(tarjetaCreditoComarca);
 
@@ -146,8 +146,8 @@ class CarritoComprasTest {
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaComarca = new Marca("Comarca");
-        Marca marcaAcme = new Marca("Acme");
+        Marca marcaComarca = new Marca(1L, "Comarca");
+        Marca marcaAcme = new Marca(2L, "Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaComarca);
@@ -157,17 +157,17 @@ class CarritoComprasTest {
                 categoriaCalzado, marcaAcme);
 
         //Creo una promocion de descuento
-        Promocion promocionVigenteProducto = new PromocionProducto(LocalDate.now().minusDays(2),
+        Descuento descuentoVigenteProducto = new DescuentoProducto(LocalDate.now().minusDays(2),
                 LocalDate.now().plusDays(5), 0.05, marcaComarca);
 
-        Promocion promocionCompra = new PromocionCompra(LocalDate.now().minusDays(2),
+        Descuento descuentoCompra = new DescuentoCompra(LocalDate.now().minusDays(2),
                 LocalDate.now().plusDays(5), 0.08, tarjetaCreditoMemeCard);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
                 "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
-                List.of(promocionVigenteProducto, promocionCompra), clienteSebastian);
+                List.of(descuentoVigenteProducto, descuentoCompra), clienteSebastian);
 
         double montoTotal = carritoCompras.montoTotal(tarjetaCreditoMemeCard);
 
@@ -186,8 +186,8 @@ class CarritoComprasTest {
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaComarca = new Marca("Comarca");
-        Marca marcaAcme = new Marca("Acme");
+        Marca marcaComarca = new Marca(1L, "Comarca");
+        Marca marcaAcme = new Marca(2L, "Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaComarca);
@@ -197,17 +197,17 @@ class CarritoComprasTest {
                 categoriaCalzado, marcaAcme);
 
         //Creo una promocion de descuento
-        Promocion promocionVigenteProducto = new PromocionProducto(LocalDate.now().minusDays(2),
+        Descuento descuentoVigenteProducto = new DescuentoProducto(LocalDate.now().minusDays(2),
                 LocalDate.now().plusDays(5), 0.05, marcaComarca);
 
-        Promocion promocionCompra = new PromocionCompra(LocalDate.now().minusDays(2),
+        Descuento descuentoCompra = new DescuentoCompra(LocalDate.now().minusDays(2),
                 LocalDate.now().plusDays(5), 0.08, tarjetaCreditoMemeCard);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
                 "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
-                List.of(promocionVigenteProducto, promocionCompra), clienteSebastian);
+                List.of(descuentoVigenteProducto, descuentoCompra), clienteSebastian);
 
         Venta venta = carritoCompras.realizarPago(tarjetaCreditoSebastian);
 
@@ -230,13 +230,13 @@ class CarritoComprasTest {
         TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
 
         assertThrows(IllegalArgumentException.class, () -> {
-            Promocion promocionProducto = new PromocionProducto(LocalDate.now().plusDays(5),
-                    LocalDate.now().plusDays(3), 0.05, new Marca("Marca"));
+            Descuento descuentoProducto = new DescuentoProducto(LocalDate.now().plusDays(5),
+                    LocalDate.now().plusDays(3), 0.05, new Marca(1L,"Marca"));
 
             TarjetaCredito tarjetaCreditoMemeCard = new TarjetaCredito(tarjetaValidacion, "12345678",
                     "MemeCard");
 
-            Promocion promocionCompra = new PromocionCompra(LocalDate.now().plusDays(5),
+            Descuento descuentoCompra = new DescuentoCompra(LocalDate.now().plusDays(5),
                     LocalDate.now().plusDays(3), 0.08, tarjetaCreditoMemeCard);
         });
     }

@@ -7,10 +7,10 @@ import java.util.List;
 public class CarritoCompras {
 
     private List<Producto> productos;
-    private List<Promocion> promociones;
+    private List<Descuento> promociones;
     private Cliente cliente;
 
-    public CarritoCompras(List<Producto> productos, List<Promocion> promociones, Cliente cliente) {
+    public CarritoCompras(List<Producto> productos, List<Descuento> promociones, Cliente cliente) {
         this.productos = productos;
         this.promociones = promociones;
         this.cliente = cliente;
@@ -33,8 +33,8 @@ public class CarritoCompras {
 
     private double descuentoTotal(TarjetaCredito tarjetaCredito) {
         return this.promociones.stream()
-                .filter(promocion -> promocion.estaActiva(LocalDate.now()))
-                .mapToDouble(promocion -> promocion.calcularDescuento(this.productos, tarjetaCredito))
+                .filter(descuento -> descuento.estaActiva(LocalDate.now()))
+                .mapToDouble(descuento -> descuento.calcularDescuento(this.productos, tarjetaCredito))
                 .sum();
     }
 

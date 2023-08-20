@@ -2,16 +2,15 @@ package ar.unrn.tp.modelo;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.function.Predicate;
 
-public class PromocionCompra implements Promocion {
+public class DescuentoProducto implements Descuento {
 
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private double descuento;
-    private TarjetaCredito tarjetaCredito;
+    private Marca marca;
 
-    public PromocionCompra(LocalDate fechaInicio, LocalDate fechaFin, double descuento, TarjetaCredito tarjetaCredito) {
+    public DescuentoProducto(LocalDate fechaInicio, LocalDate fechaFin, double descuento, Marca marca) {
 
         if (fechaInicio.isAfter(fechaFin)) {
             throw new IllegalArgumentException("Las fechas de validez están superpuestas...");
@@ -20,7 +19,7 @@ public class PromocionCompra implements Promocion {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.descuento = descuento;
-        this.tarjetaCredito = tarjetaCredito;
+        this.marca = marca;
     }
 
     @Override
@@ -31,13 +30,19 @@ public class PromocionCompra implements Promocion {
     @Override
     public double calcularDescuento(List<Producto> productos, TarjetaCredito tarjetaCredito) {
 
-        double montoTotal = 0;
-        if (this.tarjetaCredito.verificarTarjeta(tarjetaCredito)) {
-            montoTotal = productos.stream()
-                    .mapToDouble(Producto::precio)
-                    .sum();
-        }
+        return productos.stream()
+                .filter(p -> p.verificarMarca(this.marca))
+                .mapToDouble(p -> p.descuento(this.descuento))
+                .sum();
+    }
 
-        return montoTotal * this.descuento;
+    @Override
+    public String toString() {
+        return "PromocionProducto{" +
+                "fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                ", descuento=" + descuento +
+                ", marca=" + marca +
+                '}';
     }
 }
