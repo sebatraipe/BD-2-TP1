@@ -1,6 +1,8 @@
 package ar.unrn.tp.modelo;
 
+import javax.jdo.annotations.Unique;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.function.Predicate;
 
@@ -8,9 +10,11 @@ import java.util.function.Predicate;
 public class TarjetaCredito {
 
     @Id
+    @GeneratedValue
     private Long id;
     private TarjetaValidacion tarjetaValidacion;
     private String numero;
+    @Unique
     private String descripcion;
 
     public TarjetaCredito(TarjetaValidacion tarjetaValidacion, String numero, String descripcion) {

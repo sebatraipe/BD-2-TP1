@@ -1,13 +1,17 @@
 package ar.unrn.tp.modelo;
 
+import javax.jdo.annotations.Unique;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Marca {
 
     @Id
+    @GeneratedValue
     private Long id;
+    @Unique
     private String marca;
 
     public Marca(Long id, String marca) {
