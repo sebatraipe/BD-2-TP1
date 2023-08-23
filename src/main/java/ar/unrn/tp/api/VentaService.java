@@ -13,7 +13,7 @@ public interface VentaService {
 
     //Devuelve el monto total aplicando los descuentos al día de la fecha
     // validar que no llegue una lista vacía y la tarjeta exista
-    float calcularMonto(List<Long> productos, Long idTarjeta);
+    double calcularMonto(List<Long> productos, Long idTarjeta);
 
     //Devuelve todas las ventas realizadas
     List ventas();

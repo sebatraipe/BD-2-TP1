@@ -15,6 +15,10 @@ public class Marca {
         this.marca = marca;
     }
 
+    public Marca() {
+
+    }
+
     private Long getId() {
         return id;
     }

@@ -1,7 +1,10 @@
 package ar.unrn.tp.main;
 
+import ar.unrn.tp.api.ClienteService;
 import ar.unrn.tp.modelo.*;
+import ar.unrn.tp.servicios.ClienteServiceImpl;
 
+import javax.jdo.listener.ClearCallback;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -14,24 +17,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa-objectdb");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
-
-        try {
-            tx.begin();
-            Marca marca = new Marca(2L, "Adidas");
-            em.persist(marca);
-            tx.commit();
-            em.clear();
-        } catch (Exception e) {
-            tx.rollback();
-            throw new RuntimeException(e);
-        } finally {
-            if (em != null && em.isOpen())
-                em.close();
-            if (emf != null)
-                emf.close();
-        }
+        ClienteService clienteService = new ClienteServiceImpl("jpa-objectdb");
+        clienteService.crearCliente("Lionel", "Messi", "20754763",
+                "shtraipe@unrn.edu.ar");
     }
 }

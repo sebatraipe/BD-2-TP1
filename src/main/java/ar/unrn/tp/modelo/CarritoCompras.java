@@ -40,7 +40,7 @@ public class CarritoCompras {
 
     public Venta realizarPago(TarjetaCredito tarjetaCredito) {
 
-        if (!this.cliente.validarTarjeta()) {
+        if (!this.cliente.validarTarjeta(tarjetaCredito)) {
             System.out.println("La tarjeta falló...");
         }
         double montoTotal = this.calcularMontoTotal();

@@ -36,7 +36,6 @@ public class DescuentoCompra implements Descuento {
                     .mapToDouble(Producto::precio)
                     .sum();
         }
-
         return montoTotal * this.descuento;
     }
 }

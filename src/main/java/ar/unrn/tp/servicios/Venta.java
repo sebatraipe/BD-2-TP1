@@ -11,7 +11,7 @@ public class Venta implements VentaService {
     }
 
     @Override
-    public float calcularMonto(List<Long> productos, Long idTarjeta) {
+    public double calcularMonto(List<Long> productos, Long idTarjeta) {
         return 0;
     }
 

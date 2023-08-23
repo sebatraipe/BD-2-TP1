@@ -18,10 +18,10 @@ public class Venta {
         this.montoTotal = montoTotal;
     }
 
-    public void realizarPago() {
-        cliente.validarTarjeta();
-        System.out.println("El pago se realizó con éxito...");
-    }
+//    public void realizarPago() {
+//        cliente.validarTarjeta();
+//        System.out.println("El pago se realizó con éxito...");
+//    }
 
     public boolean verificarVentaPorFecha(LocalDateTime date) {
         return this.fechaHora.getDayOfMonth() == date.getDayOfMonth() &&

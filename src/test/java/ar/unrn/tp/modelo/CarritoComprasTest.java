@@ -42,7 +42,7 @@ class CarritoComprasTest {
                 LocalDate.now().minusDays(1), 0.08, tarjetaCreditoComarca);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
-                "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
+                "shtraipe@unrn.ed.ar", List.of(tarjetaCreditoSebastian));
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
                 List.of(descuentoCaducadaProducto, descuentoCaducadaMarca), clienteSebastian);
@@ -83,7 +83,7 @@ class CarritoComprasTest {
                 LocalDate.now().plusDays(5), 0.08, tarjetaCreditoComarca);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
-                "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
+                "shtraipe@unrn.ed.ar", List.of(tarjetaCreditoSebastian));
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
                 List.of(descuentoVigenteProducto, descuentoCompra), clienteSebastian);
@@ -124,7 +124,7 @@ class CarritoComprasTest {
                 LocalDate.now().plusDays(5), 0.08, tarjetaCreditoComarca);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
-                "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
+                "shtraipe@unrn.ed.ar", List.of(tarjetaCreditoSebastian));
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
                 List.of(descuentoVigenteProducto, descuentoCompra), clienteSebastian);
@@ -164,7 +164,7 @@ class CarritoComprasTest {
                 LocalDate.now().plusDays(5), 0.08, tarjetaCreditoMemeCard);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
-                "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
+                "shtraipe@unrn.ed.ar", List.of(tarjetaCreditoSebastian));
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
                 List.of(descuentoVigenteProducto, descuentoCompra), clienteSebastian);
@@ -204,7 +204,7 @@ class CarritoComprasTest {
                 LocalDate.now().plusDays(5), 0.08, tarjetaCreditoMemeCard);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
-                "shtraipe@unrn.ed.ar", tarjetaCreditoSebastian);
+                "shtraipe@unrn.ed.ar", List.of(tarjetaCreditoSebastian));
 
         CarritoCompras carritoCompras = new CarritoCompras(List.of(producto1, producto2, producto3),
                 List.of(descuentoVigenteProducto, descuentoCompra), clienteSebastian);
