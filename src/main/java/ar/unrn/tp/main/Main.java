@@ -26,7 +26,7 @@ public class Main {
 //        ClienteService clienteService = new ClienteServiceImpl("jpa-objectdb");
 //        clienteService.agregarTarjeta(6L, "11111111", "Visa");
 
-        VentaService ventaService = new VentaServiceImpl("jpa-objectdb");
+//        VentaService ventaService = new VentaServiceImpl("jpa-objectdb");
 
 //        productoService.crearProducto("0004", "Sueter", 25.000,
 //                17L, 19L);
@@ -37,7 +37,7 @@ public class Main {
 //        descuentoService.crearDescuentoSobreTotal ("12345678", LocalDate.now().minusDays(1),
 //                LocalDate.now().plusDays(12), 0.05);
 
-        ventaService.realizarVenta(6L, List.of(23L, 24L), 2L);
+//        ventaService.realizarVenta(6L, List.of(23L, 24L), 2L);
 
     }
 }

@@ -13,8 +13,8 @@ public class ProductoServiceImpl implements ProductoService {
 
     private final EntityManagerFactory entityManagerFactory;
 
-    public ProductoServiceImpl(String myPersistenceUnit) {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory(myPersistenceUnit);
+    public ProductoServiceImpl(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override

@@ -13,8 +13,8 @@ public class DescuentoServiceImpl implements DescuentoService {
 
     private final EntityManagerFactory entityManagerFactory;
 
-    public DescuentoServiceImpl(String myPersistenceUnit) {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory(myPersistenceUnit);
+    public DescuentoServiceImpl(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override

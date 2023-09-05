@@ -13,8 +13,8 @@ public class VentaServiceImpl implements VentaService {
 
     private final EntityManagerFactory entityManagerFactory;
 
-    public VentaServiceImpl(String myPersistenceUnit) {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory(myPersistenceUnit);
+    public VentaServiceImpl(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     @Override
@@ -59,8 +59,45 @@ public class VentaServiceImpl implements VentaService {
     }
 
     @Override
-    public double calcularMonto(List<Long> productos, Long idTarjeta) {
-        return 0;
+    public double calcularMonto(List<Long> productos, Long idTarjeta, Long idCliente) {
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+
+        try {
+            entityTransaction.begin();
+
+            TarjetaCredito tarjetaCredito = entityManager.find(TarjetaCredito.class, idTarjeta);
+
+            if (tarjetaCredito == null) {
+                throw new RuntimeException("La tarjeta no existe...");
+            }
+
+            List<Descuento> descuentos = entityManager.createQuery("select d from Descuento d", Descuento.class)
+                    .getResultList();
+
+            List<Producto> productosList = entityManager.createQuery(
+                            "select p from Producto p where p.id in :productos", Producto.class)
+                    .setParameter("productos", productos)
+                    .getResultList();
+
+            Cliente cliente = entityManager.find(Cliente.class, idCliente);
+
+            CarritoCompras carritoCompras = new CarritoCompras(productosList, descuentos, cliente);
+
+            entityTransaction.commit();
+            entityManager.clear();
+
+            return carritoCompras.montoTotal(tarjetaCredito);
+        } catch (Exception e) {
+            entityTransaction.rollback();
+            throw new RuntimeException(e);
+        } finally {
+            if (entityManager != null && entityManager.isOpen())
+                entityManager.close();
+            if (this.entityManagerFactory != null)
+                this.entityManagerFactory.close();
+        }
     }
 
     @Override

@@ -14,8 +14,8 @@ public class ClienteServiceImpl implements ClienteService {
 
     private final EntityManagerFactory entityManagerFactory;
 
-    public ClienteServiceImpl(String myPersistenceUnit) {
-        this.entityManagerFactory = Persistence.createEntityManagerFactory(myPersistenceUnit);
+    public ClienteServiceImpl(EntityManagerFactory entityManager) {
+        this.entityManagerFactory = entityManager;
     }
 
     @Override
