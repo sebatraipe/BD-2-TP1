@@ -347,6 +347,55 @@ public class ServiceTest {
     }
 
     @Test
+    public void puedoConsultarElMontoTotalDeUnaVenta() {
+        inTransactionExecute(
+                (em) -> {
+                    Marca marca = new Marca("Nike");
+                    em.persist(marca);
+                    Categoria categoria = new Categoria("Calzado");
+                    em.persist(categoria);
+                }
+        );
+        inTransactionExecute(
+                (em) -> {
+                    Marca marca = em.find(Marca.class, 1L);
+                    Categoria categoria = em.find(Categoria.class, 2L);
+
+                    Producto producto1 = new Producto("1234", "Zapatilla", 45.00,
+                            categoria, marca);
+                    em.persist(producto1);
+                }
+        );
+        inTransactionExecute(
+                (em) -> {
+                    Marca marca = em.find(Marca.class, 1L);
+                    Descuento descuentoProducto = new DescuentoProducto(LocalDate.now().minusDays(3),
+                            LocalDate.now().plusDays(5), 0.05, marca);
+                    em.persist(descuentoProducto);
+                    TarjetaCredito tarjetaCredito = new TarjetaCredito("12345678", "Visa", true);
+                    em.persist(tarjetaCredito);
+                    Descuento descuentoCompra = new DescuentoCompra(LocalDate.now().minusDays(3),
+                            LocalDate.now().plusDays(5), 0.08, tarjetaCredito);
+                    em.persist(descuentoCompra);
+                }
+        );
+        inTransactionExecute(
+                (em) -> {
+                    List<Descuento> descuentos = em.createQuery("select d from Descuento d", Descuento.class)
+                            .getResultList();
+                    Producto producto = em.find(Producto.class, 3L);
+                    TarjetaCredito tarjetaCredito = em.find(TarjetaCredito.class, 5L);
+                    Cliente cliente = new Cliente("Sebastian", "Traipe", "40706973",
+                            "shtraipe@unrn.edu.ar");
+                    em.persist(cliente);
+                    CarritoCompras carritoCompras = new CarritoCompras(List.of(producto), descuentos, cliente);
+
+                    assertEquals(39.15, carritoCompras.montoTotal(tarjetaCredito));
+                }
+        );
+    }
+
+    @Test
     public void puedoListarLasVentasPersistidas() {
         inTransactionExecute(
                 (em) -> {
