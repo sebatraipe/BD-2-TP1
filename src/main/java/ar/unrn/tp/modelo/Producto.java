@@ -108,4 +108,20 @@ public class Producto {
         this.setPrecio(precio);
         this.setCategoria(categoria);
     }
+
+    public boolean suCodigoEs(String codigo) {
+        return this.codigo.equals(codigo);
+    }
+
+    public boolean suDescripcionEs(String descripcion) {
+        return this.descripcion.equals(descripcion);
+    }
+
+    public boolean suCategoriaEs(String categoria) {
+        return this.categoria.verificarCategoria(categoria);
+    }
+
+    public boolean suMarcaEs(String marca) {
+        return this.marca.verificarMarca(marca);
+    }
 }

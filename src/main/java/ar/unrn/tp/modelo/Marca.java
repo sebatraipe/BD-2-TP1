@@ -14,8 +14,7 @@ public class Marca {
     @Unique
     private String marca;
 
-    public Marca(Long id, String marca) {
-        this.id = id;
+    public Marca(String marca) {
         this.marca = marca;
     }
 
@@ -45,5 +44,9 @@ public class Marca {
                 "id=" + id +
                 ", marca='" + marca + '\'' +
                 '}';
+    }
+
+    public boolean verificarMarca(String marca) {
+        return this.marca.equals(marca);
     }
 }

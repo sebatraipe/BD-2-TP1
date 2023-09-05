@@ -1,9 +1,7 @@
 package ar.unrn.tp.modelo;
 
 import javax.jdo.annotations.Unique;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.function.Predicate;
 
 @Entity
@@ -12,27 +10,22 @@ public class TarjetaCredito {
     @Id
     @GeneratedValue
     private Long id;
-    private TarjetaValidacion tarjetaValidacion;
-    private String numero;
     @Unique
+    private String numero;
     private String descripcion;
+    private boolean activa;
 
-    public TarjetaCredito(TarjetaValidacion tarjetaValidacion, String numero, String descripcion) {
-        this.tarjetaValidacion = tarjetaValidacion;
+    public TarjetaCredito(String numero, String descripcion, boolean activa) {
         this.numero = numero;
         this.descripcion = descripcion;
-    }
-
-    public TarjetaCredito(String numero, String descripcion) {
-        this.numero = numero;
-        this.descripcion = descripcion;
+        this.activa = activa;
     }
 
     protected TarjetaCredito() {
     }
 
     public boolean validarTarjeta() {
-        return this.tarjetaValidacion.validarTarjeta();
+        return this.activa;
     }
 
     public boolean verificarTarjeta(TarjetaCredito tarjetaCredito) {
@@ -45,14 +38,6 @@ public class TarjetaCredito {
 
     private void setId(Long id) {
         this.id = id;
-    }
-
-    private TarjetaValidacion getTarjetaValidacion() {
-        return tarjetaValidacion;
-    }
-
-    private void setTarjetaValidacion(TarjetaValidacion tarjetaValidacion) {
-        this.tarjetaValidacion = tarjetaValidacion;
     }
 
     private String getNumero() {
@@ -69,5 +54,29 @@ public class TarjetaCredito {
 
     private void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    private boolean getActiva() {
+        return activa;
+    }
+
+    private void setActiva(boolean activa) {
+        this.activa = activa;
+    }
+
+    public boolean verificarNumero(String numero) {
+       return this.numero.equals(numero);
+    }
+
+    @Override
+    public String toString() {
+        return "TarjetaCredito{" +
+                "numero='" + numero + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
+
+    public boolean verificar(String numeroTarjeta, String descripcionTarjeta) {
+        return this.numero.equals(numeroTarjeta) && this.descripcion.equals(descripcionTarjeta);
     }
 }

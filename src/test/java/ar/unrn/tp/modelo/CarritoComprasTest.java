@@ -14,17 +14,16 @@ class CarritoComprasTest {
     @Test
     public void testCalcularMontoSinDescuentosVigentesPeroConDescuentosCaducados() {
 
-        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
 
-        TarjetaCredito tarjetaCreditoComarca = new TarjetaCredito(tarjetaValidacion, "12345678",
-                "Comarca");
-        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito(tarjetaValidacion, "12345678",
-                "Naranja Z");
+        TarjetaCredito tarjetaCreditoComarca = new TarjetaCredito("12345678",
+                "Comarca", true);
+        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito( "12345678",
+                "Naranja Z", true);
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaNike = new Marca(1L, "Nike");
-        Marca marcaAcme = new Marca(2L, "Acme");
+        Marca marcaNike = new Marca("Nike");
+        Marca marcaAcme = new Marca("Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaNike);
@@ -55,17 +54,15 @@ class CarritoComprasTest {
     @Test
     public void testCalcularMontoConDescuentoVigenteParaProductos() {
 
-        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
-
-        TarjetaCredito tarjetaCreditoComarca = new TarjetaCredito(tarjetaValidacion, "12345678",
-                "Comarca");
-        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito(tarjetaValidacion, "12345678",
-                "Naranja Z");
+        TarjetaCredito tarjetaCreditoComarca = new TarjetaCredito("12345678",
+                "Comarca", true);
+        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito("12345678",
+                "Naranja Z", true);
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaNike = new Marca(1L, "Nike");
-        Marca marcaAcme = new Marca(2L, "Acme");
+        Marca marcaNike = new Marca("Nike");
+        Marca marcaAcme = new Marca("Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaNike);
@@ -96,17 +93,15 @@ class CarritoComprasTest {
     @Test
     public void testCalcularMontoConDescuentoVigenteDelTipoMedioDePago() {
 
-        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
-
-        TarjetaCredito tarjetaCreditoComarca = new TarjetaCredito(tarjetaValidacion, "12345678",
-                "Comarca");
-        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito(tarjetaValidacion, "23147893",
-                "Comarca");
+        TarjetaCredito tarjetaCreditoComarca = new TarjetaCredito("12345678",
+                "Comarca", true);
+        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito("23147893",
+                "Comarca", true);
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaNike = new Marca(1L,"Nike");
-        Marca marcaAcme = new Marca(2L,"Acme");
+        Marca marcaNike = new Marca("Nike");
+        Marca marcaAcme = new Marca("Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaNike);
@@ -137,31 +132,29 @@ class CarritoComprasTest {
     @Test
     public void testCalcularMontoConDescuentoVigenteDelTipoProductoYCompra() {
 
-        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
-
-        TarjetaCredito tarjetaCreditoMemeCard = new TarjetaCredito(tarjetaValidacion, "12345678",
-                "MemeCard");
-        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito(tarjetaValidacion, "23147893",
-                "MemeCard");
+        TarjetaCredito tarjetaCreditoMemeCard = new TarjetaCredito("12345678",
+                "MemeCard", true);
+        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito("23147893",
+                "MemeCard", true);
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaComarca = new Marca(1L, "Comarca");
-        Marca marcaAcme = new Marca(2L, "Acme");
+        Marca marcaComarca = new Marca("Comarca");
+        Marca marcaAcme = new Marca("Acme");
 
-        Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
+        Producto producto1 = new Producto("1234", "Zapatillas", 35.000,
                 categoriaCalzado, marcaComarca);
-        Producto producto2 = new Producto("0000", "Zapatillas", 35.000,
+        Producto producto2 = new Producto("0000", "Zapatillas", 45.000,
                 categoriaCalzado, marcaComarca);
         Producto producto3 = new Producto("9999", "Zapatillas", 10.000,
                 categoriaCalzado, marcaAcme);
 
         //Creo una promocion de descuento
         Descuento descuentoVigenteProducto = new DescuentoProducto(LocalDate.now().minusDays(2),
-                LocalDate.now().plusDays(5), 0.05, marcaComarca);
+                LocalDate.now().plusDays(12), 0.05, marcaComarca);
 
         Descuento descuentoCompra = new DescuentoCompra(LocalDate.now().minusDays(2),
-                LocalDate.now().plusDays(5), 0.08, tarjetaCreditoMemeCard);
+                LocalDate.now().plusDays(12), 0.08, tarjetaCreditoMemeCard);
 
         Cliente clienteSebastian = new Cliente("Sebastian", "Traipe", "12345678",
                 "shtraipe@unrn.ed.ar", List.of(tarjetaCreditoSebastian));
@@ -177,17 +170,15 @@ class CarritoComprasTest {
     @Test
     public void testRealizarPagoYVerificarQueSeGeneraLaVenta() {
 
-        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
-
-        TarjetaCredito tarjetaCreditoMemeCard = new TarjetaCredito(tarjetaValidacion, "12345678",
-                "MemeCard");
-        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito(tarjetaValidacion, "23147893",
-                "MemeCard");
+        TarjetaCredito tarjetaCreditoMemeCard = new TarjetaCredito("12345678",
+                "MemeCard", true);
+        TarjetaCredito tarjetaCreditoSebastian = new TarjetaCredito("23147893",
+                "MemeCard", true);
 
         Categoria categoriaCalzado = new Categoria("Calzado");
 
-        Marca marcaComarca = new Marca(1L, "Comarca");
-        Marca marcaAcme = new Marca(2L, "Acme");
+        Marca marcaComarca = new Marca("Comarca");
+        Marca marcaAcme = new Marca("Acme");
 
         Producto producto1 = new Producto("1234", "Zapatillas", 45.000,
                 categoriaCalzado, marcaComarca);
@@ -227,14 +218,12 @@ class CarritoComprasTest {
     @Test
     void testCrearDescuentoConFechasSuperpuestas() {
 
-        TarjetaValidacion tarjetaValidacion = new TarjetaServicio();
-
         assertThrows(IllegalArgumentException.class, () -> {
             Descuento descuentoProducto = new DescuentoProducto(LocalDate.now().plusDays(5),
-                    LocalDate.now().plusDays(3), 0.05, new Marca(1L,"Marca"));
+                    LocalDate.now().plusDays(3), 0.05, new Marca("Marca"));
 
-            TarjetaCredito tarjetaCreditoMemeCard = new TarjetaCredito(tarjetaValidacion, "12345678",
-                    "MemeCard");
+            TarjetaCredito tarjetaCreditoMemeCard = new TarjetaCredito("12345678",
+                    "MemeCard", true);
 
             Descuento descuentoCompra = new DescuentoCompra(LocalDate.now().plusDays(5),
                     LocalDate.now().plusDays(3), 0.08, tarjetaCreditoMemeCard);

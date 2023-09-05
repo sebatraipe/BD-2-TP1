@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public interface DescuentoService {
 
     //Validar que la fecha no se superpongan
-    void crearDescuentoSobreTotal(String marcaTarjeta, LocalDate fechaDesde,
+    void crearDescuentoSobreTotal(String numeroTarjeta, LocalDate fechaDesde,
                                   LocalDate fechaHasta, double porcentaje);
 
     //Validar que la fecha no se superpongan

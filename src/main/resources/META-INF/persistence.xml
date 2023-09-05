@@ -13,7 +13,7 @@
         <!-- 		<class>sample.MyEntity2</class> -->
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="/home/straipe/Documentos/Bases de Datos 2/testobjectdb.odb" />
+                      value="/home/straipe/Documentos/Bases de Datos 2/tptobjectdb.odb" />
             <property name="javax.persistence.jdbc.user" value="admin" />
             <property name="javax.persistence.jdbc.password" value="admin" />
         </properties>

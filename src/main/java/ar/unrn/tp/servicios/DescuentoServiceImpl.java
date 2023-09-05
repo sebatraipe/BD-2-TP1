@@ -18,7 +18,7 @@ public class DescuentoServiceImpl implements DescuentoService {
     }
 
     @Override
-    public void crearDescuentoSobreTotal(String marcaTarjeta, LocalDate fechaDesde, LocalDate fechaHasta,
+    public void crearDescuentoSobreTotal(String numeroTarjeta, LocalDate fechaDesde, LocalDate fechaHasta,
                                          double porcentaje) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
@@ -27,9 +27,13 @@ public class DescuentoServiceImpl implements DescuentoService {
             entityTransaction.begin();
 
             TarjetaCredito tarjetaCredito = entityManager.createQuery(
-                    "select t from TarjetaCredito t where t.descripcion = :marcaTarjeta", TarjetaCredito.class)
-                    .setParameter("marcaTarjeta", marcaTarjeta)
+                    "select tc from TarjetaCredito tc where tc.numero = :numero", TarjetaCredito.class)
+                    .setParameter("numero", numeroTarjeta)
                     .getSingleResult();
+
+            if (tarjetaCredito == null) {
+                throw new RuntimeException("No se encontró la tarjeta...");
+            }
 
             Descuento descuentoSobreTotal = new DescuentoCompra(fechaDesde, fechaHasta, porcentaje, tarjetaCredito);
             entityManager.persist(descuentoSobreTotal);
@@ -60,7 +64,13 @@ public class DescuentoServiceImpl implements DescuentoService {
                     .setParameter("marcaProducto", marcaProducto)
                     .getSingleResult();
 
-            Descuento descuentoSobreTotal = new DescuentoProducto(fechaDesde, fechaHasta, porcentaje, marca);
+            if (marca == null) {
+                throw new RuntimeException("No se encontro la marca...");
+            }
+
+            Descuento descuento = new DescuentoProducto(fechaDesde, fechaHasta, porcentaje, marca);
+
+            entityManager.persist(descuento);
 
             entityTransaction.commit();
             entityManager.clear();

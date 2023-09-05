@@ -19,8 +19,7 @@ public class Cliente {
     private String email;
 
     @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_persona")
-    private List<TarjetaCredito> tarjetasCredito;
+    private List<TarjetaCredito> tarjetasCredito = new ArrayList<>();
 
     public Cliente(String nombre, String apellido, String dni, String email, List<TarjetaCredito> tarjetaCredito) {
         this.nombre = nombre;
@@ -93,7 +92,45 @@ public class Cliente {
         this.setApellido(apellido);
     }
 
-    public List tarjetas() {
+    public List<TarjetaCredito> tarjetas() {
         return this.getTarjetasCredito();
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", dni='" + dni + '\'' +
+                ", email='" + email + '\'' +
+                ", tarjetasCredito=" + tarjetasCredito +
+                '}';
+    }
+
+    public void addTarjeta(TarjetaCredito tarjetaCredito) {
+        this.tarjetasCredito.add(tarjetaCredito);
+    }
+
+    public boolean seLlama(String nombre) {
+        return this.nombre.equals(nombre);
+    }
+
+    public boolean suDniEs(String dni) {
+        return this.dni.equals(dni);
+    }
+
+    public boolean suTarjetaEs(String tarjetaNumero) {
+        return this.tarjetasCredito.stream()
+                .anyMatch(tarjetaCredito -> tarjetaCredito.verificarNumero(tarjetaNumero));
+    }
+
+    public boolean suApellidoEs(String apellido) {
+        return this.apellido.equals(apellido);
+    }
+
+    public boolean tieneTarjeta(String numeroTarjeta, String descripcionTarjeta) {
+        return this.tarjetasCredito.stream()
+                .anyMatch(tarjetaCredito -> tarjetaCredito.verificar(numeroTarjeta, descripcionTarjeta));
     }
 }

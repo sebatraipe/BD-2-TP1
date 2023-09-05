@@ -80,13 +80,15 @@ public class ClienteServiceImpl implements ClienteService {
             entityTransaction.begin();
 
             Cliente cliente = entityManager.find(Cliente.class, idCliente);
+
             if (cliente == null) {
                 throw new RuntimeException("Cliente no encontrado...");
             }
 
-            TarjetaCredito tarjetaCredito = new TarjetaCredito(numero, marca);
-            cliente.agregarTarjeta(tarjetaCredito);
+            TarjetaCredito tarjetaCredito = new TarjetaCredito(numero, marca, true);
+            System.out.println(tarjetaCredito);
 
+            cliente.addTarjeta(tarjetaCredito);
             entityTransaction.commit();
             entityManager.clear();
 

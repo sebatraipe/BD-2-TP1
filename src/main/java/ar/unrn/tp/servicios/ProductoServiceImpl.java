@@ -31,6 +31,8 @@ public class ProductoServiceImpl implements ProductoService {
                 throw new RuntimeException("Categoria no encontrada...");
 
             Marca marca = entityManager.find(Marca.class, idMarca);
+            if (marca == null)
+                throw new RuntimeException("Marca no encontrada...");
             Producto producto = new Producto(codigo, descripcion, precio, categoria, marca);
             entityManager.persist(producto);
 
@@ -92,7 +94,7 @@ public class ProductoServiceImpl implements ProductoService {
 
             if (productos == null) {
                 //Ver Optional
-                throw new RuntimeException("Cliente no encontrado...");
+                throw new RuntimeException("No hay productos...");
             }
             return productos;
 

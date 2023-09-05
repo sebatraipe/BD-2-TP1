@@ -1,5 +1,6 @@
 package ar.unrn.tp.modelo;
 
+import javax.jdo.annotations.Unique;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,10 +11,14 @@ public class Categoria {
     @Id
     @GeneratedValue
     private Long id;
+    @Unique
     private String descripcion;
 
     public Categoria(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Categoria() {
     }
 
     private Long getId() {
@@ -30,5 +35,17 @@ public class Categoria {
 
     private void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public boolean verificarCategoria(String categoria) {
+        return this.descripcion.equals(categoria);
+    }
+
+    @Override
+    public String toString() {
+        return "Categoria{" +
+                "id=" + id +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
     }
 }
